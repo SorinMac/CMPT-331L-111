@@ -3,6 +3,7 @@ import java.util.Arrays;
 public class Ceaser {
 
     static void encrypt(char[] word, int moveSpace){
+
         for(int i=0; i < word.length; i++){
             int ascii = ((int) word[i] - 'A' + moveSpace) % 26;
 
@@ -31,20 +32,22 @@ public class Ceaser {
     }
 
     static void solve(char[] word){
+        char test[] = word.clone();
+
         System.out.println("All of them: ");
 
         for(int i = 0; i < 26; i++){
-            for(int k = 0; k < word.length; k++){
-                int ascii = ((int) word[k] - 'A' + i) % 26;
+            for(int k = 0; k < test.length; k++){
+                int ascii = ((int) test[k] - 'A' + i) % 26;
 
                 if (ascii < 0) {
                     ascii += 26; 
                 }
 
-                word[k] = (char) (ascii + 'A');
+                test[k] = (char) (ascii + 'A');
             }
 
-            System.out.println(Arrays.toString(word));
+            System.out.println(Arrays.toString(test));
         }
     }
 
