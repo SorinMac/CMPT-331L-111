@@ -6,7 +6,7 @@ Program Ceaser
     !Very strange way to inilize a variable
     !Also no strings :() what the hell
     integer :: move = 5
-    character(len=6) :: test = 'SORINZ'
+    character(len=26) :: test = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
     integer :: i
     
     !Calls for my functions
@@ -37,25 +37,60 @@ CONTAINS
         integer :: i
         integer :: ascii
         !thank god i can get length of word
+        !half guessed just typed in len and hoped all went well (saw the keyword)
         DO i = 1, LEN(word)
-            !ascii = 
+            !use the same names as Java 
+            !weridest thing is still that MOD is a typed out word and it being
+            !like a thing that takes two arguments is very strange
+            
+            !also ICHAR is a intersing way of handling int to char
+            !also getting the index of the thing is strange where is the (i:i)
+            !strange ho it makes a substring of it and that you get
+            ascii = MOD(ICHAR(word(i:i)) - ICHAR('A') + move, 26)
+            
+            !normal math though if statments are strange as well
+            IF (ascii < 0) THEN
+                ascii = ascii + 26
+            END IF
+            
+            word(i:i) = CHAR(ascii + ICHAR('A'))
         END DO
         
-        
+        PRINT *, word, ' This is Encrypted'
     END SUBROUTINE encrypt
     
     SUBROUTINE solve(word)
         !just a in cause we just need to use the value not modifie it
         Character(len=*), Intent(in) :: word
+        !have to allocate the space for the duplicate if not does
+        !silly pointer to the one that exists stuff
+        Character(len=LEN(word)) :: dup
         
         integer :: i
         integer :: k
         integer :: ascii
+        
+        dup = word
+        
         !thank god i can get length of word
-        DO i = 1, 26
-            DO k = 1, LEN(word)
-                !ascii =
-            END DO 
+        
+        PRINT *, "This is all of them: "
+        DO i = 1, 25
+            DO k = 1, LEN(dup)
+            
+                !same kinda stuff as encrypt
+                !just use i since we want al 26 possibilies
+                ascii = MOD(ICHAR(dup(k:k)) - ICHAR('A') + i, 26)
+                
+                IF (ascii < 0) THEN
+                    ascii = ascii + 26
+                END IF
+                
+                dup(k:k) = CHAR(ascii + ICHAR('A'))
+                
+            END DO
+            
+            PRINT *, dup
         END DO
             
         
@@ -71,9 +106,19 @@ CONTAINS
         integer :: ascii
         !thank god i can get length of word
         DO i = 1, LEN(word)
-            !ascii = 
+        
+            !same as encrypt just we subtract not add this time
+            ascii = MOD(ICHAR(word(i:i)) - ICHAR('A') - move, 26)
+            
+            IF (ascii < 0) THEN
+                ascii = ascii + 26
+            END IF
+            
+            word(i:i) = CHAR(ascii + ICHAR('A'))
+            
         END DO
         
+        PRINT *, word, ' This is Decrypted'
     END SUBROUTINE decrypt
     
 End Program Ceaser
