@@ -7,6 +7,8 @@ public class Ceaser {
         for(int i=0; i < word.length; i++){
             int ascii = ((int) word[i] - 'A' + moveSpace) % 26;
 
+            System.out.println(ascii);
+
             if (ascii < 0) {
                 ascii += 26; 
             }
@@ -21,6 +23,8 @@ public class Ceaser {
         for(int i=0; i < word.length; i++){
             int ascii = ((int) word[i] - 'A' - moveSpace) % 26;
 
+            System.out.println(ascii);
+            
             if (ascii < 0) {
                 ascii += 26; 
             }
