@@ -5,7 +5,8 @@ DATA DIVISION.
 
 WORKING-STORAGE SECTION.
 
-	01 msg PIC X(6) VALUE "SORINZ". 
+	01 msg PIC X(6) VALUE "SORINZ".
+	01 extra PIC X(6) VALUE "SORINZ".
     01 cipher PIC 9 VALUE 5. 
     01 I PIC 9 VALUE 0.
     01 ascii PIC 99 VALUE 0.
@@ -16,6 +17,7 @@ BEGIN.
     DISPLAY cipher
     
     PERFORM ENCRYPT
+    PERFORM SOLVE
     PERFORM DECRYPT
 	
     STOP RUN.
@@ -55,6 +57,10 @@ DECRYPT.
     END-PERFORM.
     
     DISPLAY "Decypted Message: " msg.
+    
+SOLVE.
+    
+    
     
     
 END PROGRAM Ceaser.
