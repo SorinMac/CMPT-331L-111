@@ -9,6 +9,8 @@ WORKING-STORAGE SECTION.
 	01 extra PIC X(6) VALUE "SORINZ".
     01 cipher PIC 9 VALUE 5. 
     01 I PIC 9 VALUE 0.
+    01 K PIC 99 VALUE 0.
+    01 J PIC 9 VAlUE 0.
     01 ascii PIC 99 VALUE 0.
     
 PROCEDURE DIVISION.
@@ -59,6 +61,28 @@ DECRYPT.
     DISPLAY "Decypted Message: " msg.
     
 SOLVE.
+
+    *note sure why the nested perfrom is not working
+    *says that there is not end-perfrom for it event though there is two 
+
+    PERFORM VARYING K FROM 1 BY 1 UNTIL K = 26
+         PERFORM VARYING J FROM 1 BY 1 UNTIL J > FUNCTION LENGTH(extra)
+            MOVE FUNCTION ORD (extra(J:1)) TO ascii
+            SUBTRACT 65 FROM ascii
+            ADD K TO ascii
+            DIVIDE ascii BY 26 GIVING ascii REMAINDER ascii
+            
+            IF ascii < 0 THEN
+                ADD 26 TO ascii
+            END-IF
+            
+            ADD 65 TO ascii
+            MOVE FUNCTION CHAR(ascii) TO extra(J:1)
+        END-PERFORM.
+        
+        DISPLAY "Solve Message: " extra.
+    END-PERFORM.
+    
     
     
     
