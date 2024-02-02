@@ -68,9 +68,10 @@ Function Solve(value As String) As String
     dim ascii as integer
     dim AS string clone = value
     
-    print "This is all of them:"
+    print "This is all of them: "
     
     for i = 1 To 25
+        clone = value
         for k = 1 To len(clone)
 
             'same kind of seperation

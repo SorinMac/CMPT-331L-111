@@ -76,6 +76,7 @@ CONTAINS
         
         PRINT *, "This is all of them: "
         DO i = 1, 25
+        dup = word
             DO k = 1, LEN(dup)
             
                 !same kinda stuff as encrypt

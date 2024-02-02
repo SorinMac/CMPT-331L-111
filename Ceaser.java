@@ -23,7 +23,8 @@ public class Ceaser {
         for(int i=0; i < word.length; i++){
             int ascii = ((int) word[i] - 'A' - moveSpace) % 26;
             
-            System.out.println(ascii);
+            //System.out.println(ascii);
+
             if (ascii < 0) {
                 ascii += 26; 
             }
@@ -35,24 +36,26 @@ public class Ceaser {
     }
 
     static void solve(char[] word){
-        char test[] = word.clone();
-
         System.out.println("All of them: ");
-
+    
         for(int i = 0; i < 26; i++){
+            // Create a copy of the original array for each iteration
+            char[] test = Arrays.copyOf(word, word.length);
+    
             for(int k = 0; k < test.length; k++){
                 int ascii = ((int) test[k] - 'A' + i) % 26;
-
+    
                 if (ascii < 0) {
                     ascii += 26; 
                 }
-
+    
                 test[k] = (char) (ascii + 'A');
             }
-
+    
             System.out.println(Arrays.toString(test));
         }
     }
+    
 
     public static void main(String[] args){
         int move = 5;

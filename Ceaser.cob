@@ -15,12 +15,12 @@ WORKING-STORAGE SECTION.
     
 PROCEDURE DIVISION.
 BEGIN.
-    DISPLAY msg 
-    DISPLAY cipher
+    DISPLAY msg.
+    DISPLAY cipher.
     
-    PERFORM ENCRYPT
-    PERFORM SOLVE
-    PERFORM DECRYPT
+    PERFORM ENCRYPT.
+    PERFORM SOLVE.
+    PERFORM DECRYPT.
 	
     STOP RUN.
     
@@ -62,25 +62,23 @@ DECRYPT.
     
 SOLVE.
 
-    *note sure why the nested perfrom is not working
-    *says that there is not end-perfrom for it event though there is two 
-
     PERFORM VARYING K FROM 1 BY 1 UNTIL K = 26
+        MOVE "SORINZ" TO extra
          PERFORM VARYING J FROM 1 BY 1 UNTIL J > FUNCTION LENGTH(extra)
             MOVE FUNCTION ORD (extra(J:1)) TO ascii
             SUBTRACT 65 FROM ascii
             ADD K TO ascii
             DIVIDE ascii BY 26 GIVING ascii REMAINDER ascii
             
-            IF ascii < 0 THEN
+            IF ascii <= 0 THEN
                 ADD 26 TO ascii
             END-IF
             
             ADD 65 TO ascii
             MOVE FUNCTION CHAR(ascii) TO extra(J:1)
-        END-PERFORM.
+        END-PERFORM
         
-        DISPLAY "Solve Message: " extra.
+        DISPLAY "Solve Message: " extra
     END-PERFORM.
     
     
