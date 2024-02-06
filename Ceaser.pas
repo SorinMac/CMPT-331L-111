@@ -56,7 +56,7 @@ function solve(word: string): string;
     begin
         writeln('This is the solve');
         
-        for k := 1 to 26 do
+        for k := 1 to 25 do
             begin
             for i := 1 to length(word) do
                 begin
@@ -85,8 +85,7 @@ var
 begin
 
     {declaring the varaibles that we need}
-    word := 'SORINZ'
-    dup := 'SORINZ'
+    word := 'SORINZ';
     move := 5;
     
     word := encrypt(word, move);
