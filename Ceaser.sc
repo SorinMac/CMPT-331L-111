@@ -32,8 +32,25 @@ object JDoodle {
         println(word.mkString(" "))
     }
     
-    def solve(): Unit = {
-        println("Hello, Scala!");
+    def solve(word: Array[Char]): Unit = {
+       println("This is Solve: ");
+       var clone = word.clone();
+       
+       for(k <- 0 to 25){
+           clone = word.clone();
+           for (i <- 0  to clone.length-1){
+                var ascii = ((clone(i).toInt - 65 + k) % 26);
+                
+                if(ascii < 0){
+                    ascii = ascii + 26;
+                }
+                
+                clone(i) = (ascii + 65).toChar;
+            }
+        
+            println(clone.mkString(" "))
+       }
+       
     }
 
 
@@ -45,6 +62,7 @@ object JDoodle {
         
         
         encrypt(word, move);
+        solve(word);
         decrypt(word, move);
     }
 }
