@@ -16,8 +16,13 @@
 
 (defun Ceaser_Solve(thing)
    (format t "This is all of them: ")
-   ;how would i do this without a for loop
+   (defvar solve_move 1)
+   
+   (setf thing (map 'string (lambda (i)
+   (code-char (+ 65 (mod (- (- (char-code i) 65) solve_move) 26)))) thing))
    (write thing)
+   (setq solve_move (1+ solve_move))
+   (when (solve_move < 26) Ceaser_Solve thing)
    (terpri)
 )
 
