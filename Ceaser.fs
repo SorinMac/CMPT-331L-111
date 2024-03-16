@@ -22,11 +22,17 @@ let Decrypt (word : string) (move : int) =
     let shifted = String.map (fun i -> shiftD(i, move)) word
     printfn "%s" shifted
     
-let Solve (word : string) (move : int) =
-    printfn "%s" word
-    printfn "%i" move
+let rec Solve (word : string) (move : int) =
+    let shifted = String.map (fun i -> shiftE(i, move)) word
+    printfn "%s" shifted
+    if move < 26 then
+        let mutable i = move
+        i <- i + 1
+        Solve "SORINZ" i
 
 let mutable word = "SORINZ"
 let move = 5
 word <- Encrypt word move
+printfn "%s" "This is Solve: "
+Solve "SORINZ" 1
 Decrypt word move
