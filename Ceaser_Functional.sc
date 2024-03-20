@@ -30,7 +30,10 @@ object JDoodle {
     }
     
     def solve(word: Array[Char], move: Int, i: Int): Unit = {
-       if (move < 26){
+        var test = "SORINZ";
+        var clone = test.toCharArray();
+        
+        if (move < 27){
            if(i < (word.length)){
                 var ascii = ((word(i).toInt - 65 + move) % 26);
         
@@ -43,9 +46,10 @@ object JDoodle {
                 solve(word, move, i+1);
            }else{
                println(word.mkString(" "))
-               solve(word, move+1, 0)
+               
+               solve(clone, move+1, 0)
            }
-       }
+        }
     }
 
 
@@ -62,7 +66,7 @@ object JDoodle {
         println(hold.mkString(" "))
         
         println("This is Solve: ");
-        solve(word, 0, 0);
+        solve(word, 1, 0);
         
         println("This is decrypted: ");
         decrypt(check, move, 0);
