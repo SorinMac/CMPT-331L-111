@@ -64,8 +64,9 @@ clone = encrypt(word, move, 0);
 clone2 = structuredClone(clone);
 console.log(clone);
 
+clone3 = test.split('');
 console.log("This is Solved: ");
-solve(word, 1, 0);
+solve(clone3, 1, 0);
 
 console.log("This is Decrypted: ");
 decrypt(clone2, move, 0);
