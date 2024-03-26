@@ -22,8 +22,9 @@ shift2(Char, Move) ->
 	Ascii + $A.
 	
 encrypt(Test, Move) ->
-    Encrypted = lists:map(fun(Char) -> shift1([Char], Move) end, Test),
-    io:fwrite("~p~n", [Encrypted]).
+    Encrypt = lists:map(fun(Char) -> shift1([Char], Move) end, Test),
+    io:fwrite("~p~n", [Encrypt]),
+    Encrypt.
 	
 decrypt(Test, Move) ->
 	Decrypt = lists:map(fun(Char) -> shift2([Char], Move) end, Test),
@@ -43,8 +44,9 @@ main() ->
 	Test = "SORINZ",
 	Move = 5,
 	io:fwrite("This is Encrypt:\n"),
-	encrypt(Test, Move),
+	New = encrypt(Test, Move),
 	io:fwrite("This is Solve:\n"),
 	solve(Test, 1, 0),
 	io:fwrite("This is Decrypt:\n"),
-	decrypt(Test, Move).
+	%how to make is so that new is able to be passed to the decrypt function
+	decrypt(New, Move).
