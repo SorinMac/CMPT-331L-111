@@ -49,5 +49,4 @@ main() ->
 	io:fwrite("This is Solve:\n"),
 	solve(Test, 1, 0),
 	io:fwrite("This is Decrypt:\n"),
-	%how to make is so that new is able to be passed to the decrypt function
 	decrypt(Test2, Move).
