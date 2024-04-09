@@ -1,25 +1,22 @@
 object JDoodle {
-  def encrypt(word: Array[Char], move: Int): Unit = {
-        println("This is encrypted: ");
+  def encrypt(word: Array[Char], move: Int, i: Int): Array[Char]= {
+      if(i < (word.length)){
+        var ascii = ((word(i).toInt - 65 + move) % 26);
         
-        for (i <- 0  to word.length-1){
-            var ascii = ((word(i).toInt - 65 + move) % 26);
-            
-            if(ascii < 0){
-                ascii = ascii + 26;
-            }
-            
-            word(i) = (ascii + 65).toChar;
+        if(ascii < 0){
+            ascii = ascii + 26;
         }
         
-        println(word.mkString(" "))
+        word(i) = (ascii + 65).toChar;
         
+        encrypt(word, move, i+1);
+      }
+      
+      return word;
     }
     
-    def decrypt(word: Array[Char], move: Int): Unit = {
-        println("This is decrypted: ");
-        
-        for (i <- 0  to word.length-1){
+    def decrypt(word: Array[Char], move: Int, i: Int): Unit = {
+        if(i < (word.length)){
             var ascii = ((word(i).toInt - 65 - move) % 26);
             
             if(ascii < 0){
@@ -27,42 +24,52 @@ object JDoodle {
             }
             
             word(i) = (ascii + 65).toChar;
+            
+            decrypt(word, move, i+1);
         }
-        
-        println(word.mkString(" "))
     }
     
-    def solve(word: Array[Char]): Unit = {
-       println("This is Solve: ");
-       var clone = word.clone();
-       
-       for(k <- 0 to 25){
-           clone = word.clone();
-           for (i <- 0  to clone.length-1){
-                var ascii = ((clone(i).toInt - 65 + k) % 26);
-                
+    def solve(word: Array[Char], move: Int, i: Int): Unit = {
+        var test = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        var clone = test.toCharArray();
+        
+        if (move < 27){
+           if(i < (word.length)){
+                var ascii = ((clone(i).toInt - 65 + move) % 26);
+        
                 if(ascii < 0){
                     ascii = ascii + 26;
                 }
                 
-                clone(i) = (ascii + 65).toChar;
-            }
-        
-            println(clone.mkString(" "))
-       }
-       
+                word(i) = (ascii + 65).toChar;
+                
+                solve(word, move, i+1);
+           }else{
+               println(word.mkString(" "))
+               
+               solve(clone, move+1, 0)
+           }
+        }
     }
 
 
     def main(args: Array[String]) {
 
-        var test : String = "SORINZ";
+        var test : String = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
         var move : Int = 5;
+        var hold : Array[Char] = null;
         var word = test.toCharArray();
         
+        println("This is encrypted: ");
+        hold = encrypt(word, move, 0);
+        var check = hold.clone();
+        println(hold.mkString(" "))
         
-        encrypt(word, move);
-        solve(word);
-        decrypt(word, move);
+        println("This is Solve: ");
+        solve(word, 1, 0);
+        
+        println("This is decrypted: ");
+        decrypt(check, move, 0);
+        println(check.mkString(" "))
     }
 }
